@@ -64,7 +64,7 @@ dose_response <- function (cause, outcome_type, dose, confidence_interval = F){
     return(runif(1, min=lb, max=ub))
   }
   else
-    return(lookup_table[which.min(abs(lookup_table$dose - dose)), "RR"])
+    return(lookup_table[which.min(abs(lookup_table$dose - dose)), "RR"]) %>% as.numeric()
 
   # browser()
 
