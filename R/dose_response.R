@@ -54,7 +54,7 @@ dose_response <- function (cause, outcome_type, dose, confidence_interval = F){
   print(fname)
 
   lookup_table <- read_csv(system.file("extdata", paste0(fname, ".csv"), package = "drpa", mustWork = TRUE))
-  print(summary(lookup_table))
+  # print(summary(lookup_table))
 
   if (confidence_interval){
 
