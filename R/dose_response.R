@@ -60,9 +60,9 @@ dose_response <- function (cause, outcome_type, dose, confidence_interval = F){
 
   # browser()
 
-  if ((!is.null(dose) && !is.na(dose)) && dose <= 35)
-    return(lookup_table[which.min(abs(lookup_table$dose - dose)), "RR"])
-  else
-    return(lookup_table[which.min(abs(lookup_table$dose - 35)), "RR"])
+  # if ((!is.null(dose) && !is.na(dose)) && dose <= 35)
+  #   return(lookup_table[which.min(abs(lookup_table$dose - dose)), "RR"])
+  # else
+  #   return(lookup_table[which.min(abs(lookup_table$dose - 35)), "RR"])
 
 }
