@@ -10,15 +10,16 @@
 #' @param cause All-Cause or disease name
 #' @param outcome_type Mortality or Incidence
 #' @param dose Dose (all-cause or disease)
-#' @param confidence_interval Boolean variable to determine whether confidence intervals are returned or not - default false
-#' @return response for a specific dose
+#' @param confidence_intervals Boolean variable to determine whether confidence intervals are returned or not - default false
+#' @param certainty Certain response (fixed) or uncertain in the range of lower and upper bounds - default is certain (T)
+#' @return response for a specific dose (in a data frame)
 #' @importFrom magrittr %>%
 #' @name %>%
 #' @rdname dose_response
 #' @export
 #'
 
-dose_response <- function (cause, outcome_type, dose, confidence_interval = F){
+dose_response <- function (cause, outcome_type, dose, confidence_intervals = F, certainty = T){
 
   if (is.na(dose) || class(dose) != "numeric")
     stop ('Please provide dose in numeric')
@@ -63,7 +64,48 @@ dose_response <- function (cause, outcome_type, dose, confidence_interval = F){
 
   # print(summary(lookup_table))
 
-  if (confidence_interval){
+  if (confidence_intervals){
+
+    if (certainty){
+
+      rr <- lookup_table[which.min(abs(lookup_table$dose - dose)), "RR"] %>% as.numeric()
+      lb <- lookup_table[which.min(abs(lookup_table$dose - dose)), "lb"] %>% as.numeric()
+      ub <- lookup_table[which.min(abs(lookup_table$dose - dose)), "ub"] %>% as.numeric()
+
+      return (data.frame (rr = rr, lb = lb, ub = ub))
+
+    }else{
+
+
+      lb <- lookup_table[which.min(abs(lookup_table$dose - dose)), "lb"] %>% as.numeric()
+      ub <- lookup_table[which.min(abs(lookup_table$dose - dose)), "ub"] %>% as.numeric()
+      rr <- stats::runif(1, min=lb, max=ub)
+
+      return (data.frame (rr = rr, lb = lb, ub = ub))
+
+    }
+
+  }else{
+
+
+    if (certainty){
+
+      rr = lookup_table[which.min(abs(lookup_table$dose - dose)), "RR"] %>% as.numeric()
+      return(data.frame(rr = rr))
+
+    }else{
+
+      lb <- lookup_table[which.min(abs(lookup_table$dose - dose)), "lb"] %>% as.numeric()
+      ub <- lookup_table[which.min(abs(lookup_table$dose - dose)), "ub"] %>% as.numeric()
+
+      rr <- stats::runif(1, min=lb, max=ub)
+      return(data.frame(rr = rr))
+
+    }
+
+  }
+
+  if (certainty){
 
     lb <- lookup_table[which.min(abs(lookup_table$dose - dose)), "lb"] %>% as.numeric()
     ub <- lookup_table[which.min(abs(lookup_table$dose - dose)), "ub"] %>% as.numeric()
