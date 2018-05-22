@@ -53,18 +53,18 @@ dose_response <- function (cause, outcome_type, dose, confidence_interval = F){
 
   print(fname)
 
-  lookup_table <- read_csv(system.file("extdata", paste0(fname, ".csv"), package = "drpa", mustWork = TRUE))
+  lookup_table <- readr::read_csv(system.file("extdata", paste0(fname, ".csv"), package = "drpa", mustWork = TRUE))
   # print(summary(lookup_table))
 
   if (confidence_interval){
 
-    lb <- lookup_table[which.min(abs(lookup_table$dose - dose)), "lb"] %>% as.numeric()
-    ub <- lookup_table[which.min(abs(lookup_table$dose - dose)), "ub"] %>% as.numeric()
+    lb <- as.numeric(lookup_table[which.min(abs(lookup_table$dose - dose)), "lb"])
+    ub <- as.numeric(lookup_table[which.min(abs(lookup_table$dose - dose)), "ub"])
 
-    return(runif(1, min=lb, max=ub))
+    return(stats::runif(1, min=lb, max=ub))
   }
   else
-    return(lookup_table[which.min(abs(lookup_table$dose - dose)), "RR"]) %>% as.numeric()
+    return(as.numeric(lookup_table[which.min(abs(lookup_table$dose - dose)), "RR"]))
 
   # browser()
 
