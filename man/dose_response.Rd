@@ -5,7 +5,8 @@
 \alias{dose_response}
 \title{Dose response for Physical Acitivity}
 \usage{
-dose_response(cause, outcome_type, dose, confidence_interval = F)
+dose_response(cause, outcome_type, dose, confidence_intervals = F,
+  certainty = T)
 }
 \arguments{
 \item{cause}{All-Cause or disease name}
@@ -14,10 +15,12 @@ dose_response(cause, outcome_type, dose, confidence_interval = F)
 
 \item{dose}{Dose (all-cause or disease)}
 
-\item{confidence_interval}{Boolean variable to determine whether confidence intervals are returned or not - default false}
+\item{confidence_intervals}{Boolean variable to determine whether confidence intervals are returned or not - default false}
+
+\item{certainty}{Certain response (fixed) or uncertain in the range of lower and upper bounds - default is certain (T)}
 }
 \value{
-response for a specific dose
+response for a specific dose (in a data frame)
 }
 \description{
 Based on our meta-analysis, returns a response value for a specific cause or disease. \cr
