@@ -12,6 +12,9 @@
 #' @param dose Dose (all-cause or disease)
 #' @param confidence_interval Boolean variable to determine whether confidence intervals are returned or not - default false
 #' @return response for a specific dose
+#' @importFrom magrittr %>%
+#' @name %>%
+#' @rdname dose_response
 #' @export
 #'
 
@@ -58,13 +61,13 @@ dose_response <- function (cause, outcome_type, dose, confidence_interval = F){
 
   if (confidence_interval){
 
-    lb <- as.numeric(lookup_table[which.min(abs(lookup_table$dose - dose)), "lb"])
-    ub <- as.numeric(lookup_table[which.min(abs(lookup_table$dose - dose)), "ub"])
+    lb <- lookup_table[which.min(abs(lookup_table$dose - dose)), "lb"] %>% as.numeric()
+    ub <- lookup_table[which.min(abs(lookup_table$dose - dose)), "ub"] %>% as.numeric()
 
     return(stats::runif(1, min=lb, max=ub))
   }
   else
-    return(as.numeric(lookup_table[which.min(abs(lookup_table$dose - dose)), "RR"]))
+    return(lookup_table[which.min(abs(lookup_table$dose - dose)), "RR"] %>% as.numeric())
 
   # browser()
 
