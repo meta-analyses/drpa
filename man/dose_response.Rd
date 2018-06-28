@@ -6,7 +6,7 @@
 \title{Dose response for Physical Acitivity}
 \usage{
 dose_response(cause, outcome_type, dose, confidence_intervals = F,
-  certainty = T)
+  certainty = T, use_75_pert = T)
 }
 \arguments{
 \item{cause}{All-Cause or disease name}
