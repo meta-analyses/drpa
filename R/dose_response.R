@@ -19,7 +19,7 @@
 #' @export
 #'
 
-dose_response <- function (cause, outcome_type, dose, confidence_intervals = F, certainty = T){
+dose_response <- function (cause, outcome_type, dose, confidence_intervals = F, certainty = T, use_75_pert = T){
 
   if (is.na(dose) || class(dose) != "numeric")
     stop ('Please provide dose in numeric')
@@ -62,23 +62,33 @@ dose_response <- function (cause, outcome_type, dose, confidence_intervals = F, 
                                               mustWork = TRUE),
                                   col_type = readr::cols())
 
-  # print(summary(lookup_table))
+  pert_75 <- readr::read_csv(system.file("extdata", "75p_diseases.csv",
+                                         package = "drpa",
+                                         mustWork = TRUE),
+                             col_type = readr::cols())
+
+  # print(summary(pert_75))
+
+  cond <- ifelse(use_75_pert,
+                 abs(lookup_table$dose - dose),
+                 which.min(abs(lookup_table$dose - dose)))
 
   if (confidence_intervals){
 
     if (certainty){
 
-      rr <- lookup_table[which.min(abs(lookup_table$dose - dose)), "RR"] %>% as.numeric()
-      lb <- lookup_table[which.min(abs(lookup_table$dose - dose)), "lb"] %>% as.numeric()
-      ub <- lookup_table[which.min(abs(lookup_table$dose - dose)), "ub"] %>% as.numeric()
+
+      rr <- lookup_table[cond, "RR"] %>% as.numeric()
+      lb <- lookup_table[cond, "lb"] %>% as.numeric()
+      ub <- lookup_table[cond, "ub"] %>% as.numeric()
 
       return (data.frame (rr = rr, lb = lb, ub = ub))
 
     }else{
 
 
-      lb <- lookup_table[which.min(abs(lookup_table$dose - dose)), "lb"] %>% as.numeric()
-      ub <- lookup_table[which.min(abs(lookup_table$dose - dose)), "ub"] %>% as.numeric()
+      lb <- lookup_table[cond, "lb"] %>% as.numeric()
+      ub <- lookup_table[cond, "ub"] %>% as.numeric()
       rr <- stats::runif(1, min=lb, max=ub)
 
       return (data.frame (rr = rr, lb = lb, ub = ub))
@@ -90,13 +100,14 @@ dose_response <- function (cause, outcome_type, dose, confidence_intervals = F, 
 
     if (certainty){
 
-      rr = lookup_table[which.min(abs(lookup_table$dose - dose)), "RR"] %>% as.numeric()
+      rr = lookup_table[cond, "RR"] %>% as.numeric()
       return(data.frame(rr = rr))
 
     }else{
 
-      lb <- lookup_table[which.min(abs(lookup_table$dose - dose)), "lb"] %>% as.numeric()
-      ub <- lookup_table[which.min(abs(lookup_table$dose - dose)), "ub"] %>% as.numeric()
+
+      lb <- lookup_table[cond, "lb"] %>% as.numeric()
+      ub <- lookup_table[cond, "ub"] %>% as.numeric()
 
       rr <- stats::runif(1, min=lb, max=ub)
       return(data.frame(rr = rr))
@@ -107,13 +118,16 @@ dose_response <- function (cause, outcome_type, dose, confidence_intervals = F, 
 
   if (certainty){
 
-    lb <- lookup_table[which.min(abs(lookup_table$dose - dose)), "lb"] %>% as.numeric()
-    ub <- lookup_table[which.min(abs(lookup_table$dose - dose)), "ub"] %>% as.numeric()
+
+    lb <- lookup_table[cond, "lb"] %>% as.numeric()
+    ub <- lookup_table[cond, "ub"] %>% as.numeric()
 
     return(stats::runif(1, min=lb, max=ub))
   }
-  else
-    return(lookup_table[which.min(abs(lookup_table$dose - dose)), "RR"] %>% as.numeric())
+  else{
+
+    return(lookup_table[cond, "RR"] %>% as.numeric())
+  }
 
   # browser()
 
