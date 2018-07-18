@@ -25,7 +25,7 @@ dose_response <- function (cause, outcome_type, dose, confidence_intervals = F, 
     stop ('Please provide dose in numeric')
 
   if (!cause %in% c('all-cause-mortality', 'breast-cancer', 'cardiovascular-disease',
-                   'colon-cancer', 'coronary-heart-disease', 'endometrial-cancer',
+                   'colon-cancer', 'coronary-heart-disease', 'diabetes', 'endometrial-cancer',
                    'heart-failure', 'lung-cancer', 'stroke', 'total-cancer')){
     stop('Unsupported cause/disease. Please select from \n
          all-cause-mortality \n
@@ -55,7 +55,7 @@ dose_response <- function (cause, outcome_type, dose, confidence_intervals = F, 
   if (cause == 'all-cause-mortality')
     fname <- cause
 
-  print(fname)
+  #print(fname)
 
   lookup_table <- readr::read_csv(system.file("extdata", paste0(fname, ".csv"),
                                               package = "drpa",
