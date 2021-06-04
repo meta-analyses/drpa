@@ -7,7 +7,7 @@
 #' At the end, this function returns a response values with or without confidence interval
 #'
 #'
-#' @param cause All-Cause-mortality or disease name
+#' @param cause All-cause-mortality or disease name
 #' @param outcome_type Fatal, non-fatal or fatal-and-non-fatal
 #' @param dose Dose (all-cause or disease)
 #' @param confidence_intervals Boolean variable to determine whether confidence intervals are returned or not - default false
