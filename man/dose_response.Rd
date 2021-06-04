@@ -3,21 +3,29 @@
 \name{\%>\%}
 \alias{\%>\%}
 \alias{dose_response}
-\title{Dose response for Physical Acitivity}
+\title{Dose response for Physical Activity}
 \usage{
-dose_response(cause, outcome_type, dose, confidence_intervals = F,
-  certainty = T, use_75_pert = T)
+dose_response(
+  cause,
+  outcome_type,
+  dose,
+  confidence_intervals = F,
+  certainty = T,
+  use_75_pert = T
+)
 }
 \arguments{
-\item{cause}{All-Cause or disease name}
+\item{cause}{All-Cause-mortality or disease name}
 
-\item{outcome_type}{Mortality or Incidence}
+\item{outcome_type}{Fatal, non-fatal or fatal-and-non-fatal}
 
 \item{dose}{Dose (all-cause or disease)}
 
 \item{confidence_intervals}{Boolean variable to determine whether confidence intervals are returned or not - default false}
 
 \item{certainty}{Certain response (fixed) or uncertain in the range of lower and upper bounds - default is certain (T)}
+
+\item{use_75_pert}{Last quantile determined by person years; beyond which there is less confidence}
 }
 \value{
 response for a specific dose (in a data frame)
@@ -25,7 +33,7 @@ response for a specific dose (in a data frame)
 \description{
 Based on our meta-analysis, returns a response value for a specific cause or disease. \cr
 1. Disease/Cause: Name of the disease/cause - from a specific list\cr
-2. Type: Mortality or Incidence. \cr
+2. Type: Fatal, non-fatal or fatal-and-non-fatal. \cr
 }
 \details{
 At the end, this function returns a response values with or without confidence interval
