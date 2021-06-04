@@ -25,22 +25,32 @@ dose_response <- function (cause, outcome_type, dose, confidence_intervals = F, 
   if (is.na(dose) || class(dose) != "numeric")
     stop ('Please provide dose in numeric')
 
-  if (!cause %in% c('all-cause-cancer', 'all-cause-cvd', 'all-cause-dementia', 'all-cause-mortality', 'bladder-cancer', 'breast-cancer', 'colon-cancer',
+  if (!cause %in% c('all-cause-cancer', 'all-cause-cvd', 'all-cause-mortality', 'bladder-cancer', 'breast-cancer', 'colon-cancer',
                     'coronary-heart-disease', 'diabetes', 'endometrial-cancer', 'esophageal-cancer', 'gastric-cardia-cancer',
                     'head-and-neck-cancer', 'heart-failure', 'kidney-cancer', 'liver-cancer', 'lung-cancer',
-                    'myeloma', 'prostate-cancer', 'rectum-cancer', 'stroke')){
+                    'myeloma', 'myeloid-leukemia', 'prostate-cancer', 'rectum-cancer', 'stroke')){
     stop('Unsupported cause/disease. Please select from \n
+         all-cause-cancer \n
          all-cause-mortality \n
+         all-cause-cvd \n
+         bladder-cancer \n
          breast-cancer\n
-         cardiovascular-disease \n
          colon-cancer \n
          coronary-heart-disease \n
          diabetes \n
          endometrial-cancer \n
+         esophageal-cancer \n
+         gastric-cardia-cancer \n
+         head-and-neck-cancer \n
          heart-failure \n
+         kidney-cancer \n
+         liver-cancer \n
          lung-cancer \n
-         stroke \n
-         total-cancer')
+         myeloma \n
+         myeloid-leukemia \n
+         prostate-cancer \n
+         rectum-cancer \n
+         stroke')
 
   }
 
@@ -51,18 +61,7 @@ dose_response <- function (cause, outcome_type, dose, confidence_intervals = F, 
          fatal-and-non-fatal')
   }
 
-  if (cause == 'all-cause-mortality' && outcome_type == 'non-fatal')
-    stop('Non-fatal does not exist for all-cause-mortality')
-
-  if (cause == 'diabetes' && outcome_type != 'fatal')
-    stop('Non-fatal (and combined) does not exist for dementia')
-
   fname <- paste(cause, outcome_type, sep = "-")
-
-  #if (cause == 'all-cause-mortality')
-  #  fname <- cause
-
-  print(fname)
 
   if (!file.exists(system.file("extdata", paste0(fname, ".csv"),
                               package = "drpa"))){
