@@ -7,7 +7,7 @@ Depends: R (>= 3.4)
 License: AGPL
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.0.1
+RoxygenNote: 7.1.1
 Imports: tidyverse,
     magrittr,
     stats,
