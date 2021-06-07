@@ -15,7 +15,7 @@ dose_response(
 )
 }
 \arguments{
-\item{cause}{All-Cause-mortality or disease name}
+\item{cause}{All-cause-mortality or disease name}
 
 \item{outcome_type}{Fatal, non-fatal or fatal-and-non-fatal}
 

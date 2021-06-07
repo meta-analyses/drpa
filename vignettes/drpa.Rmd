@@ -14,6 +14,18 @@ knitr::opts_chunk$set(
 )
 ```
 
+## Installation from GitHub
+
+The package is not available at CRAN. It needs to be installed from GitHub. Please use this command to install it. 
+
+```{r install, eval=FALSE}
+remotes::install_github("meta-analyses/drpa")
+```
+You may need to install the `remotes` package first.
+
+## Setup
 ```{r setup}
 library(drpa)
 ```
+
+
