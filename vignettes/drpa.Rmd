@@ -21,9 +21,11 @@ The package is not available at CRAN. It needs to be installed from GitHub. Plea
 ```{r install, eval=FALSE}
 remotes::install_github("meta-analyses/drpa")
 ```
-You may need to install the `remotes` package first.
+You may need to install the `remotes` package first. 
 
 ## Setup
+
+Load the package
 ```{r setup}
 library(drpa)
 ```
