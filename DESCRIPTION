@@ -12,4 +12,8 @@ Imports: tidyverse,
     magrittr,
     stats,
     readr
-Suggests: testthat
+Suggests: 
+    rmarkdown,
+    knitr,
+    testthat
+VignetteBuilder: knitr
