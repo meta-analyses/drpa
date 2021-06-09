@@ -14,9 +14,8 @@
 #' @param certainty Certain response (fixed) or uncertain in the range of lower and upper bounds - default is certain (T)
 #' @param use_75_pert Last quantile determined by person years; beyond which there is less confidence
 #' @return response for a specific dose (in a data frame)
-#' @importFrom magrittr %>%
-#' @name %>%
 #' @rdname dose_response
+#' @importFrom magrittr %>%
 #' @export
 #'
 
