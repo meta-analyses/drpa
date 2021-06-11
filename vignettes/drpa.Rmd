@@ -8,8 +8,8 @@ vignette: >
 ---
 
 ```{r, echo = FALSE, message = FALSE}
-knitr::opts_chunk$set(collapse = T, comment = "#>")
-options(tibble.print_min = 4L, tibble.print_max = 4L)
+knitr::opts_chunk$set(collapse = T, comment = "#>", root.dir = 'vignettes')
+options(tibble.print_min = 4L, tibble.print_max = 4L, rmarkdown.html_vignette.check_title = FALSE)
 ```
 
 ## Installation from GitHub
