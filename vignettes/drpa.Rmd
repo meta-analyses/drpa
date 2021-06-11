@@ -1,5 +1,5 @@
 ---
-title: "Introduction to drpa"
+title: "Introduction to Dose-Response Physical Activity (drpa) package"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{drpa}
@@ -7,27 +7,63 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
+```{r, echo = FALSE, message = FALSE}
+knitr::opts_chunk$set(collapse = T, comment = "#>")
+options(tibble.print_min = 4L, tibble.print_max = 4L)
 ```
 
 ## Installation from GitHub
 
-The package is not available at CRAN. It needs to be installed from GitHub. Please use this command to install it. 
+The package is not available at CRAN. It needs to be installed from GitHub. Please use this command to install it.
 
 ```{r install, eval=FALSE}
 remotes::install_github("meta-analyses/drpa")
 ```
-You may need to install the `remotes` package first. 
+
+You may need to install the `remotes` package first.
+
+## List of diseases/cause and their upper limit
+
+The first column `disease` specifies the supported diseases in the package. The other three columns, which are outcome types (`fatal`, `non-fatal` and `fatal-and-non-fatal`), show the last knot (based on the available data points) for the specific disease. We don't have confidence that our meta-analysis is reliable after this point, and assumes a flat relationship after this point. Whenever a disease such as `all-cause-cvd` doesn't have an outcome type `non-fatal`, it will be `NA`. More will follow in the next section.
+
+```{r echo=FALSE, message=FALSE}
+
+require(kableExtra)
+
+dtable <- readr::read_csv('../inst/extdata/75p_diseases.csv')
+
+kbl(dtable) %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"))
+
+```
 
 ## Setup
 
 Load the package
+
 ```{r setup}
 library(drpa)
 ```
+
+## Get dose response relationship
+
+```{r}
+
+drpa::dose_response(cause = 'all-cause-cvd', outcome_type = "fatal-and-non-fatal", dose = 40, confidence_intervals = TRUE, certainty = TRUE)
+
+
+```
+
+
+| Argument             | Description                                                                                           |
+|----------------------|-------------------------------------------------------------------------------------------------------|
+| cause                | All-cause-mortality or disease name                                                                   |
+| outcome_type         | Fatal, non-fatal or fatal-and-non-fatal                                                               |
+| dose                 | Dose (all-cause or disease)                                                                           |
+| confidence_intervals | Boolean variable to determine whether confidence intervals are returned or not - default false        |
+| certainty            | Certain response (fixed) or uncertain in the range of lower and upper bounds - default is certain (T) |
+| use_75_pert          | Last quantile determined by person years; beyond which there is less confidence                       |
+
+: Arguments
 
 
