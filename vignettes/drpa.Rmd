@@ -24,7 +24,7 @@ You may need to install the `remotes` package first.
 
 ## List of diseases/cause and their upper limit
 
-The first column `disease` specifies the supported diseases in the package. The other three columns, which are outcome types (`fatal`, `non-fatal` and `fatal-and-non-fatal`), show the last knot (based on the available data points) for the specific disease. We don't have confidence that our meta-analysis is reliable after this point, and assumes a flat relationship after this point. Whenever a disease such as `all-cause-cvd` doesn't have an outcome type `non-fatal`, it will be `NA`. More will follow in the next section.
+The first column `disease` specifies the supported diseases in the package. The other three columns, which are outcome types (`fatal`, `non-fatal` and `fatal-and-non-fatal`), show the last knot (based on the available data points) for the specific disease. We don't have confidence that our meta-analysis is reliable after this point, and assumes an onward flat relationship. Whenever a disease such as `all-cause-cvd` doesn't have an outcome type `non-fatal`, it will be `NA`. More will follow in the next section.
 
 ```{r echo=FALSE, message=FALSE}
 
@@ -47,23 +47,32 @@ library(drpa)
 
 ## Get dose response relationship
 
+Get response for dose *4*0 for *all-cause-cvd*
+
 ```{r}
 
-drpa::dose_response(cause = 'all-cause-cvd', outcome_type = "fatal-and-non-fatal", dose = 40, confidence_intervals = TRUE, certainty = TRUE)
+drpa::dose_response(cause = 'all-cause-cvd', outcome_type = "fatal-and-non-fatal", 
+                    dose = 40, confidence_intervals = TRUE, certainty = TRUE)
 
 
 ```
 
+### Arguments
 
+Description of the arguments are mentioned below:
+
++----------------------+-------------------------------------------------------------------------------------------------------+
 | Argument             | Description                                                                                           |
-|----------------------|-------------------------------------------------------------------------------------------------------|
++======================+=======================================================================================================+
 | cause                | All-cause-mortality or disease name                                                                   |
-| outcome_type         | Fatal, non-fatal or fatal-and-non-fatal                                                               |
++----------------------+-------------------------------------------------------------------------------------------------------+
+| outcome_type         | Either one of the three possibilities for outcome type: fatal, non-fatal or fatal-and-non-fatal                                                               |
++----------------------+-------------------------------------------------------------------------------------------------------+
 | dose                 | Dose (all-cause or disease)                                                                           |
++----------------------+-------------------------------------------------------------------------------------------------------+
 | confidence_intervals | Boolean variable to determine whether confidence intervals are returned or not - default false        |
++----------------------+-------------------------------------------------------------------------------------------------------+
 | certainty            | Certain response (fixed) or uncertain in the range of lower and upper bounds - default is certain (T) |
++----------------------+-------------------------------------------------------------------------------------------------------+
 | use_75_pert          | Last quantile determined by person years; beyond which there is less confidence                       |
-
-: Arguments
-
-
++----------------------+-------------------------------------------------------------------------------------------------------+
