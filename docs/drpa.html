@@ -572,19 +572,20 @@ NA
 </div>
 <div id="get-dose-response-relationship" class="section level2">
 <h2>Get dose response relationship</h2>
-<p>Get response for dose <em>4</em>0 for <em>all-cause-cvd</em></p>
+<p>Get response for dose <em>40</em> for <em>all-cause-cvd</em> with the default quantile <em>0.5</em></p>
+<p>Quantile’s value is between 0 and 1 [excluding the boundary values]</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>drpa<span class="sc">::</span><span class="fu">dose_response</span>(<span class="at">cause =</span> <span class="st">&#39;all-cause-cvd&#39;</span>, <span class="at">outcome_type =</span> <span class="st">&quot;fatal-and-non-fatal&quot;</span>, </span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">dose =</span> <span class="dv">40</span>, <span class="at">confidence_intervals =</span> <span class="cn">TRUE</span>, <span class="at">certainty =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          rr        lb       ub</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 0.8713133 0.8430586 0.900515</span></span></code></pre></div>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>drpa<span class="sc">::</span><span class="fu">dose_response</span>(<span class="at">cause =</span> <span class="st">&#39;all-cause-cvd&#39;</span>, <span class="at">outcome_type =</span> <span class="st">&#39;fatal-and-non-fatal&#39;</span>, <span class="at">dose =</span> <span class="dv">40</span>, </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">quantile =</span> <span class="fl">0.5</span>, <span class="at">confidence_intervals =</span> T, <span class="at">use_75_pert =</span> T)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          rr        lb        ub</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 0.6700916 0.6256548 0.7176846</span></span></code></pre></div>
 <div id="arguments" class="section level3">
 <h3>Arguments</h3>
 <p>Description of the arguments are mentioned below:</p>
 <table>
 <colgroup>
-<col width="18%" />
-<col width="81%" />
+<col width="14%" />
+<col width="85%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -606,16 +607,16 @@ NA
 <td>Dose (all-cause or disease)</td>
 </tr>
 <tr class="even">
-<td>confidence_intervals</td>
-<td>Boolean variable to determine whether confidence intervals are returned or not - default false</td>
+<td>quantile</td>
+<td>Numeric value between 0 and 1 - default is <code>0.5</code>. This captures the range of dose values between <code>lower</code> and <code>upper</code> confidence levels.</td>
 </tr>
 <tr class="odd">
-<td>certainty</td>
-<td>Certain response (fixed) or uncertain in the range of lower and upper bounds - default is certain (T)</td>
-</tr>
-<tr class="even">
 <td>use_75_pert</td>
 <td>Last quantile determined by person years; beyond which there is less confidence</td>
+</tr>
+<tr class="even">
+<td>confidence_intervals</td>
+<td>Boolean variable to determine whether confidence intervals are returned or not - default false</td>
 </tr>
 </tbody>
 </table>
