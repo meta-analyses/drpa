@@ -47,12 +47,14 @@ library(drpa)
 
 ## Get dose response relationship
 
-Get response for dose *4*0 for *all-cause-cvd*
+Get response for dose *40* for *all-cause-cvd* with the default quantile *0.5*
+
+Quantile's value is between 0 and 1 [excluding the boundary values]
 
 ```{r}
 
-drpa::dose_response(cause = 'all-cause-cvd', outcome_type = "fatal-and-non-fatal", 
-                    dose = 40, confidence_intervals = TRUE, certainty = TRUE)
+drpa::dose_response(cause = 'all-cause-cvd', outcome_type = 'fatal-and-non-fatal', dose = 40, 
+                    quantile = 0.5, confidence_intervals = T, use_75_pert = T)
 
 
 ```
@@ -61,18 +63,18 @@ drpa::dose_response(cause = 'all-cause-cvd', outcome_type = "fatal-and-non-fatal
 
 Description of the arguments are mentioned below:
 
-+----------------------+-------------------------------------------------------------------------------------------------------+
-| Argument             | Description                                                                                           |
-+======================+=======================================================================================================+
-| cause                | All-cause-mortality or disease name                                                                   |
-+----------------------+-------------------------------------------------------------------------------------------------------+
-| outcome_type         | Either one of the three possibilities for outcome type: fatal, non-fatal or fatal-and-non-fatal                                                               |
-+----------------------+-------------------------------------------------------------------------------------------------------+
-| dose                 | Dose (all-cause or disease)                                                                           |
-+----------------------+-------------------------------------------------------------------------------------------------------+
-| confidence_intervals | Boolean variable to determine whether confidence intervals are returned or not - default false        |
-+----------------------+-------------------------------------------------------------------------------------------------------+
-| certainty            | Certain response (fixed) or uncertain in the range of lower and upper bounds - default is certain (T) |
-+----------------------+-------------------------------------------------------------------------------------------------------+
-| use_75_pert          | Last quantile determined by person years; beyond which there is less confidence                       |
-+----------------------+-------------------------------------------------------------------------------------------------------+
++----------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+| Argument             | Description                                                                                                                             |
++======================+=========================================================================================================================================+
+| cause                | All-cause-mortality or disease name                                                                                                     |
++----------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+| outcome_type         | Either one of the three possibilities for outcome type: fatal, non-fatal or fatal-and-non-fatal                                         |
++----------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+| dose                 | Dose (all-cause or disease)                                                                                                             |
++----------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+| quantile             | Numeric value between 0 and 1 - default is `0.5`. This captures the range of dose values between `lower` and `upper` confidence levels. |
++----------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+| use_75_pert          | Last quantile determined by person years; beyond which there is less confidence                                                         |
++----------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+| confidence_intervals | Boolean variable to determine whether confidence intervals are returned or not - default false                                          |
++----------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
