@@ -1,7 +1,7 @@
 cff-version: 1.0
 message: "If you use this R package, please cite it as below."
 authors:
-  - family-names: "Abbas"
+- family-names: "Abbas"
   given-names: "Ali"
 title: "Dose-response of Physical Activity"
 version: 0.0.1
