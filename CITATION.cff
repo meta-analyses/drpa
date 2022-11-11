@@ -1,0 +1,9 @@
+cff-version: 1.0
+message: "If you use this R package, please cite it as below."
+authors:
+  - family-names: "Abbas"
+  given-names: "Ali"
+title: "Dose-response of Physical Activity"
+version: 0.0.1
+date-released: 2021-13-09
+url: "https://github.com/meta-analyses/drpa/"
