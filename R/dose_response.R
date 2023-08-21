@@ -21,7 +21,7 @@
 
 dose_response <- function (cause, outcome_type, dose, quantile = 0.5, use_75_pert = T, confidence_intervals = F){
 
-  if (is.na(dose) || class(dose) != "numeric")
+  if (is.null(dose) || class(dose) != "numeric")
     stop ('Please provide dose in numeric')
 
   if (is.na(quantile) || class(quantile) != 'numeric' || quantile >= 1 || quantile < 0)
