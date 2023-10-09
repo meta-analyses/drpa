@@ -27,7 +27,7 @@ You may need to install the `remotes` package first.
 The first column `disease` specifies the supported diseases in the package. The other three columns, which are outcome types (`fatal`, `non-fatal` and `fatal-and-non-fatal`), show the last knot (based on the available data points) for the specific disease. We don't have confidence that our meta-analysis is reliable after this point, and assumes an onward flat relationship. Whenever a disease such as `all-cause-cvd` doesn't have an outcome type `non-fatal`, it will be `NA`. More will follow in the next section.
 
 ```{r echo=FALSE, message=FALSE}
-
+library(magrittr)
 require(kableExtra)
 
 dtable <- readr::read_csv('../inst/extdata/75p_diseases.csv')
