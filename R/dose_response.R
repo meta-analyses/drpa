@@ -11,7 +11,9 @@
 #' @param outcome_type Fatal, non-fatal or fatal-and-non-fatal
 #' @param dose Dose (all-cause or disease)
 #' @param quantile Numeric value between 0 and 1 - default is 0.5
-#' @param censor_method Use either no censor method, or the 75th percentile by person years or use a fixed WHO recommended double level of physical activity (17.5 MMet hours per week) - default is 17.5 MMET hours per week (double the WHO recommencded guideline)
+#' @param censor_method Use either no censor method, or the 75th percentile by person years,
+# ' use a fixed WHO recommended double level of physical activity (17.5 MMET hours per week) - default is 17.5 MMET hours per week (double the WHO recommencded guideline), or
+#  use a fixed WHO recommended quadruple level of physical activity (35 MMET hours per week)
 #' @param confidence_intervals Boolean variable to determine whether confidence intervals are returned or not - default is FALSE
 #' @return response for a specific dose (in a data frame)
 #' @rdname dose_response
@@ -19,7 +21,7 @@
 #' @export
 #'
 
-dose_response <- function (cause, outcome_type, dose, quantile = 0.5, censor_method = "WHO-DRL", confidence_intervals = F){
+dose_response <- function (cause, outcome_type, dose, quantile = 0.5, censor_method = "75thPercentile", confidence_intervals = F){
 
   if (is.null(dose) || class(dose) != "numeric")
     stop ('Please provide dose in numeric')
@@ -27,8 +29,8 @@ dose_response <- function (cause, outcome_type, dose, quantile = 0.5, censor_met
   if (is.na(quantile) || class(quantile) != 'numeric' || quantile >= 1 || quantile < 0)
     stop('Please provide the quantile value between 0 and 1')
 
-  if (is.na(censor_method) || class(censor_method) != "character" || !censor_method %in% c('none', '75person_years','WHO-DRL'))
-    stop('Please specificy `censor_method` by selecting either of three options: `none`, `75person_years`,`WHO-DRL`')
+  if (is.na(censor_method) || class(censor_method) != "character" || !censor_method %in% c('none', '75thPercentile','WHO-DRL', 'WHO-QRL'))
+    stop('Please specificy `censor_method` by selecting either of four options: `none`, `75thPercentile`,`WHO-DRL`,`WHO-QRL`')
 
   pert_75 <- readr::read_csv(system.file("extdata", "75p_diseases.csv",
                                          package = "drpa",
@@ -86,12 +88,15 @@ dose_response <- function (cause, outcome_type, dose, quantile = 0.5, censor_met
                                               mustWork = TRUE),
                                   col_type = readr::cols())
 
-  if(censor_method == "75person_years"){
+  if(censor_method == "75thPercentile"){
     upper_limit <- pert_75 %>% dplyr::filter(disease == cause) %>% dplyr::select(outcome_type) %>% as.numeric()
     dose[dose > upper_limit] <- upper_limit
-  }else if (censor_method == "WHO-DRL"){
+  }else if (censor_method == "WHO-DRL"){ # Double of WHO's recommended level of PA for adults - which is 17.5 MMETs hours per week
     dose[dose > 17.5] <- 17.5
+  }else if (censor_method == "WHO-QRL"){ # Quadruple of WHO's recommended level of PA for adults - which is 35 MMETs hours per week
+    dose[dose > 35] <- 35
   }
+
 
   rr <- approx(x = lookup_table$dose, y = lookup_table$RR, xout = dose,yleft = 1, yright = min(lookup_table$RR))$y
   if (confidence_intervals || quantile != 0.5) {
