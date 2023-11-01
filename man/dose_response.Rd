@@ -8,9 +8,9 @@ dose_response(
   cause,
   outcome_type,
   dose,
-  confidence_intervals = F,
-  certainty = T,
-  use_75_pert = T
+  quantile = 0.5,
+  censor_method = "75thPercentile",
+  confidence_intervals = F
 )
 }
 \arguments{
@@ -20,11 +20,11 @@ dose_response(
 
 \item{dose}{Dose (all-cause or disease)}
 
-\item{confidence_intervals}{Boolean variable to determine whether confidence intervals are returned or not - default false}
+\item{quantile}{Numeric value between 0 and 1 - default is 0.5}
 
-\item{certainty}{Certain response (fixed) or uncertain in the range of lower and upper bounds - default is certain (T)}
+\item{censor_method}{Use either no censor method, or the 75th percentile by person years,}
 
-\item{use_75_pert}{Last quantile determined by person years; beyond which there is less confidence}
+\item{confidence_intervals}{Boolean variable to determine whether confidence intervals are returned or not - default is FALSE}
 }
 \value{
 response for a specific dose (in a data frame)
