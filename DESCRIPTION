@@ -1,6 +1,6 @@
 Package: drpa
 Title: Dose-response for Physical Activity and various causes and diseases
-Version: 0.0.3
+Version: 0.0.4
 Authors@R: person("Ali", "Abbas", email = "m.ali.abbas@gmail.com", role = c("aut", "cre"))
 Description: This package returns a response for a specific dose. This includes a number of diseases and all-cause mortality. Also it is used to return fatal, non-fatal or combined response. 
 Depends: R (>= 3.4)
