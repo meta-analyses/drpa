@@ -89,7 +89,7 @@ dose_response <- function (cause, outcome_type, dose, quantile = 0.5, censor_met
                                   col_type = readr::cols())
 
   if(censor_method == "75thPercentile"){
-    upper_limit <- pert_75 %>% dplyr::filter(disease == cause) %>% dplyr::select(outcome_type) %>% as.numeric()
+    upper_limit <- pert_75 %>% dplyr::filter(disease == cause) %>% dplyr::select(all_of(outcome_type)) %>% as.numeric()
     dose[dose > upper_limit] <- upper_limit
   }else if (censor_method == "WHO-DRL"){ # Double of WHO's recommended level of PA for adults - which is 17.5 MMETs hours per week
     dose[dose > 17.5] <- 17.5
