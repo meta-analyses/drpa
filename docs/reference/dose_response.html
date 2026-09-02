@@ -82,7 +82,22 @@
 
 
 <dt id="arg-censor-method">censor_method<a class="anchor" aria-label="anchor" href="#arg-censor-method"></a></dt>
-<dd><p>Use either no censor method, or the 75th percentile by person years,</p></dd>
+<dd><p>Censoring method to use. Options are:</p><dl><dt>`none`</dt>
+<dd><p>No censoring.</p></dd>
+
+    <dt>`default`</dt>
+<dd><p>The default censoring method identified by the meta-analysis.</p></dd>
+
+    <dt>`WHO-DRL`</dt>
+<dd><p>A fixed WHO-recommended double level of physical activity
+      (17.5 MMET-hours per week).</p></dd>
+
+    <dt>`WHO-QRL`</dt>
+<dd><p>A fixed WHO-recommended quadruple level of physical activity
+      (35 MMET-hours per week).</p></dd>
+
+
+</dl></dd>
 
 
 <dt id="arg-confidence-intervals">confidence_intervals<a class="anchor" aria-label="anchor" href="#arg-confidence-intervals"></a></dt>
