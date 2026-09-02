@@ -21,7 +21,7 @@
 #' @export
 #'
 
-dose_response <- function (cause, outcome_type, dose, quantile = 0.5, censor_method = "75thPercentile", confidence_intervals = F){
+dose_response <- function (cause, outcome_type, dose, quantile = 0.5, censor_method = "default", confidence_intervals = F){
 
   if (is.null(dose) || class(dose) != "numeric")
     stop ('Please provide dose in numeric')
@@ -29,10 +29,10 @@ dose_response <- function (cause, outcome_type, dose, quantile = 0.5, censor_met
   if (is.na(quantile) || class(quantile) != 'numeric' || quantile >= 1 || quantile < 0)
     stop('Please provide the quantile value between 0 and 1')
 
-  if (is.na(censor_method) || class(censor_method) != "character" || !censor_method %in% c('none', '75thPercentile','WHO-DRL', 'WHO-QRL'))
-    stop('Please specificy `censor_method` by selecting either of four options: `none`, `75thPercentile`,`WHO-DRL`,`WHO-QRL`')
+  if (is.na(censor_method) || class(censor_method) != "character" || !censor_method %in% c('none', 'default','WHO-DRL', 'WHO-QRL'))
+    stop('Please specificy `censor_method` by selecting either of four options: `none`, `default`,`WHO-DRL`,`WHO-QRL`')
 
-  pert_75 <- readr::read_csv(system.file("extdata", "75p_diseases.csv",
+  pert_75 <- readr::read_csv(system.file("extdata", "default_cutoff.csv",
                                          package = "drpa",
                                          mustWork = TRUE),
                              col_type = readr::cols())
@@ -88,7 +88,7 @@ dose_response <- function (cause, outcome_type, dose, quantile = 0.5, censor_met
                                               mustWork = TRUE),
                                   col_type = readr::cols())
 
-  if(censor_method == "75thPercentile"){
+  if(censor_method == "default"){
     upper_limit <- pert_75 %>% dplyr::filter(disease == cause) %>% dplyr::select(all_of(outcome_type)) %>% as.numeric()
     dose[dose > upper_limit] <- upper_limit
   }else if (censor_method == "WHO-DRL"){ # Double of WHO's recommended level of PA for adults - which is 17.5 MMETs hours per week
