@@ -11,9 +11,15 @@
 #' @param outcome_type Fatal, non-fatal or fatal-and-non-fatal
 #' @param dose Dose (all-cause or disease)
 #' @param quantile Numeric value between 0 and 1 - default is 0.5
-#' @param censor_method Use either no censor method, or the 75th percentile by person years,
-# ' use a fixed WHO recommended double level of physical activity (17.5 MMET hours per week) - default is 17.5 MMET hours per week (double the WHO recommencded guideline), or
-#  use a fixed WHO recommended quadruple level of physical activity (35 MMET hours per week)
+#' @param censor_method Censoring method to use. Options are:
+#'   \describe{
+#'     \item{`none`}{No censoring.}
+#'     \item{`default`}{The default censoring method identified by the meta-analysis.}
+#'     \item{`WHO-DRL`}{A fixed WHO-recommended double level of physical activity
+#'       (17.5 MMET-hours per week).}
+#'     \item{`WHO-QRL`}{A fixed WHO-recommended quadruple level of physical activity
+#'       (35 MMET-hours per week).}
+#' }
 #' @param confidence_intervals Boolean variable to determine whether confidence intervals are returned or not - default is FALSE
 #' @return response for a specific dose (in a data frame)
 #' @rdname dose_response

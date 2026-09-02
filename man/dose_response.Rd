@@ -22,7 +22,15 @@ dose_response(
 
 \item{quantile}{Numeric value between 0 and 1 - default is 0.5}
 
-\item{censor_method}{Use either no censor method, or the 75th percentile by person years,}
+\item{censor_method}{Censoring method to use. Options are:
+  \describe{
+    \item{`none`}{No censoring.}
+    \item{`default`}{The default censoring method identified by the meta-analysis.}
+    \item{`WHO-DRL`}{A fixed WHO-recommended double level of physical activity
+      (17.5 MMET-hours per week).}
+    \item{`WHO-QRL`}{A fixed WHO-recommended quadruple level of physical activity
+      (35 MMET-hours per week).}
+}}
 
 \item{confidence_intervals}{Boolean variable to determine whether confidence intervals are returned or not - default is FALSE}
 }
