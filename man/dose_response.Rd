@@ -9,7 +9,7 @@ dose_response(
   outcome_type,
   dose,
   quantile = 0.5,
-  censor_method = "75thPercentile",
+  censor_method = "default",
   confidence_intervals = F
 )
 }
