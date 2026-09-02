@@ -2,7 +2,7 @@ disease,fatal,non-fatal,fatal-and-non-fatal
 all-cause-cancer,19.13776699,NA,19.49427481
 all-cause-cvd,21.33552239,NA,20.11288344
 all-cause-dementia,NA,13.512,11.41597015
-all-cause-mortality,12.68427907,NA,12.68427907
+all-cause-mortality,21.865,NA,NA
 alzheimer's-disease,NA,22.3675,13.63785714
 bladder-cancer,NA,NA,13.45
 breast-cancer,15.47684211,NA,26.75480315
@@ -10,7 +10,7 @@ colon-cancer,NA,NA,20.10135802
 coronary-heart-disease,11.00135593,NA,17.96
 depression,NA,14.56451613,14.56451613
 depressive-symptoms,NA,11.75641026,11.75641026
-diabetes,NA,17.538,NA
+diabetes,NA,NA,NA
 endometrial-cancer,NA,NA,21.16857143
 esophageal-cancer,NA,NA,21.82206897
 gastric-cardia-cancer,NA,NA,22.523
