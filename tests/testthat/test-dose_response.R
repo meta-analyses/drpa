@@ -54,14 +54,14 @@ test_that("dose_response works with different causes", {
 })
 
 test_that("dose_response works with different outcome_types", {
-  result_fatal <- dose_response("all-cause-mortality", "fatal", 10)
-  result_nonfatal <- dose_response("all-cause-mortality", "fatal-and-non-fatal", 10)
+  result_fatal <- dose_response(cause = "all-cause-mortality", outcome_type = "fatal", dose = 10)
+  result_nonfatal <- dose_response(cause = "all-cause-cancer", outcome_type ="fatal-and-non-fatal", dose = 10)
   expect_s3_class(result_fatal, "data.frame")
   expect_s3_class(result_nonfatal, "data.frame")
 })
 
-test_that("dose_response applies 75thPercentile censor correctly", {
-  result <- dose_response("all-cause-mortality", "fatal", 100, censor_method = "75thPercentile")
+test_that("dose_response applies default censor correctly", {
+  result <- dose_response("all-cause-mortality", "fatal", 100, censor_method = "default")
   expect_type(result$rr, "double")
 })
 
