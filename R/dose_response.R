@@ -29,13 +29,20 @@
 
 dose_response <- function (cause, outcome_type, dose, quantile = 0.5, censor_method = "default", confidence_intervals = F){
 
-  if (is.null(dose) || class(dose) != "numeric")
+  if (is.null(dose) || !is.numeric(dose))
     stop ('Please provide dose in numeric')
 
-  if (is.na(quantile) || class(quantile) != 'numeric' || quantile >= 1 || quantile < 0)
+  if (length(quantile) != 1L ||
+      is.na(quantile) ||
+      !is.numeric(quantile) ||
+      quantile >= 1 ||
+      quantile < 0)
     stop('Please provide the quantile value between 0 and 1')
 
-  if (is.na(censor_method) || class(censor_method) != "character" || !censor_method %in% c('none', 'default','WHO-DRL', 'WHO-QRL'))
+  if (length(censor_method) != 1L ||
+      is.na(censor_method) ||
+      !is.character(censor_method) ||
+      !censor_method %in% c("none", "default", "WHO-DRL", "WHO-QRL"))
     stop('Please specificy `censor_method` by selecting either of four options: `none`, `default`,`WHO-DRL`,`WHO-QRL`')
 
   pert_75 <- readr::read_csv(system.file("extdata", "default_cutoff.csv",
@@ -95,7 +102,7 @@ dose_response <- function (cause, outcome_type, dose, quantile = 0.5, censor_met
                                   col_type = readr::cols())
 
   if(censor_method == "default"){
-    upper_limit <- pert_75 %>% dplyr::filter(disease == cause) %>% dplyr::select(all_of(outcome_type)) %>% as.numeric()
+    upper_limit <- pert_75 %>% dplyr::filter(disease == cause) %>% dplyr::select(dplyr::all_of(outcome_type)) %>% as.numeric()
     dose[dose > upper_limit] <- upper_limit
   }else if (censor_method == "WHO-DRL"){ # Double of WHO's recommended level of PA for adults - which is 17.5 MMETs hours per week
     dose[dose > 17.5] <- 17.5
@@ -104,10 +111,10 @@ dose_response <- function (cause, outcome_type, dose, quantile = 0.5, censor_met
   }
 
 
-  rr <- approx(x = lookup_table$dose, y = lookup_table$RR, xout = dose,yleft = 1, yright = min(lookup_table$RR))$y
+  rr <- stats::approx(x = lookup_table$dose, y = lookup_table$RR, xout = dose,yleft = 1, yright = min(lookup_table$RR))$y
   if (confidence_intervals || quantile != 0.5) {
     lb <-
-      approx(
+      stats::approx(
         x = lookup_table$dose,
         y = lookup_table$lb,
         xout = dose,
@@ -115,7 +122,7 @@ dose_response <- function (cause, outcome_type, dose, quantile = 0.5, censor_met
         yright = min(lookup_table$lb)
       )$y
     ub <-
-      approx(
+      stats::approx(
         x = lookup_table$dose,
         y = lookup_table$ub,
         xout = dose,
@@ -125,7 +132,7 @@ dose_response <- function (cause, outcome_type, dose, quantile = 0.5, censor_met
   }
   ## we assume that the columns describe a normal distribution with standard deviation defined by the upper and lower bounds.
   if (quantile != 0.5){
-    rr <- qnorm(quantile, mean = rr, sd = (ub-lb)/1.96)
+    rr <- stats::qnorm(quantile, mean = rr, sd = (ub-lb)/1.96)
     rr[rr<0] <- 0
   }
 
