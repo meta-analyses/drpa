@@ -23,6 +23,7 @@ Please use `citation("drpa")` to cite the package, or use this instead:
   volume = {57},
   number = {15},
   pages = {979--989},
-  doi = {https://doi.org/10.1136/bjsports-2022-105669}
+  doi = { https://doi.org/10.1136/bjsports-2022-105669 }
+  
 }
 
