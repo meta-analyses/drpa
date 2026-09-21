@@ -1,9 +1,12 @@
 bibentry(
   "Article",
-  title = "Physical activity and risk of cardiovascular disease, cancer, and mortality: a dose-response meta-analysis of prospective studies",
-  author = "Leandro Garcia, Tessa Strain, Ali Abbas, Matthew Pearce, Alexander Mok, Alessio Crippa, Yvonne Laird, Paul Kelly, Katrien Wijndaele, Andrea Smith, Paddy Dempsey, Sara Ali, Sam Moore, Thiago Sá, Justin Jeon, Rajna Golubic, Eoin McNamara, Phillip Edwards, Soren Brage, James Woodcock",
-  year = 2018,
-  journal = "PROSPERO: International prospective register of systematic reviews",
-  doi = "https://www.crd.york.ac.uk/PROSPERO/display_record.php?RecordID=95481",
-  textVersion = "Leandro Garcia, Tessa Strain, Ali Abbas, Matthew Pearce, Alexander Mok, Alessio Crippa, Yvonne Laird, Paul Kelly, Katrien Wijndaele, Andrea Smith, Paddy Dempsey, Sara Ali, Sam Moore, Thiago Sá, Justin Jeon, Rajna Golubic, Eoin McNamara, Phillip Edwards, Soren Brage, James Woodcock. Physical activity and risk of cardiovascular disease, cancer, and mortality: a dose-response meta-analysis of prospective studies. PROSPERO 2018 CRD42018095481 Available from: https://www.crd.york.ac.uk/prospero/display_record.php?ID=CRD42018095481"
+  title = "Non-occupational physical activity and risk of cardiovascular disease, cancer and mortality outcomes: a dose-response meta-analysis of large prospective studies",
+  author = "Leandro Garcia, Matthew Pearce, Ali Abbas, Alexander Mok, Tessa Strain, Sara Ali, Alessio Crippa, Paddy C. Dempsey, Rajna Golubic, Paul Kelly, Yvonne Laird, Eoin McNamara, Samuel Moore, Thiago Herick de Sa, Andrea D. Smith, Katrien Wijndaele, James Woodcock, Soren Brage",
+  year = 2023,
+  journal = "British Journal of Sports Medicine",
+  volume = 57,
+  number = 15,
+  pages = "979-989",
+  doi = "https://doi.org/10.1136/bjsports-2022-105669",
+  textVersion = "Leandro Garcia, Matthew Pearce, Ali Abbas, Alexander Mok, Tessa Strain, Sara Ali, Alessio Crippa, Paddy C. Dempsey, Rajna Golubic, Paul Kelly, Yvonne Laird, Eoin McNamara, Samuel Moore, Thiago Herick de Sa, Andrea D. Smith, Katrien Wijndaele, James Woodcock, Soren Brage. Non-occupational physical activity and risk of cardiovascular disease, cancer and mortality outcomes: a dose-response meta-analysis of large prospective studies. British Journal of Sports Medicine 2023;57(15):979-989. https://doi.org/10.1136/bjsports-2022-105669"
 )
